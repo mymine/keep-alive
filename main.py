@@ -1,7 +1,7 @@
 import os
-import random
 import time
 import requests
+import secrets
 
 render_url = os.environ['render_url']
 OptikServers_url = os.environ['OptikServers_url']
@@ -33,7 +33,7 @@ start_time = time.time()
 number = 0
 while (time.time() - start_time) < 200:
     try:
-        headers = {'User-Agent': random.choice(ua_list)}
+        headers = {'User-Agent': secrets.SystemRandom().choice(ua_list)}
         req = request(render_url, head=headers)
         req_3 = request(zeabur_url, head=headers)
         req_1 = request(vercel_share_url, head=headers)
@@ -49,10 +49,10 @@ while (time.time() - start_time) < 200:
         if req.json()["code"] == 0:
             print(req.text)
             number += 1
-            time.sleep(random.randint(2, 5))
+            time.sleep(secrets.SystemRandom().randint(2, 5))
         else:
             print("失败！")
-            time.sleep(random.randint(5, 8))
+            time.sleep(secrets.SystemRandom().randint(5, 8))
             number += 1
     except Exception as e:
         print(e)
