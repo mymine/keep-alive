@@ -1,7 +1,7 @@
 import os
 import random
 import time
-import requests
+from security import safe_requests
 
 render_url = os.environ['render_url']
 zeabur_url = os.environ['zeabur_url']
@@ -20,7 +20,7 @@ ua_list = [
 
 def request(uri, head=None):
     try:
-        info = requests.get(uri, headers=head, timeout=6)
+        info = safe_requests.get(uri, headers=head, timeout=6)
         return info
     except Exception as c:
         print(c)
